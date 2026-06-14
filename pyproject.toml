@@ -10,7 +10,6 @@ requires-python = "==3.14.*"
 readme = "README.md"
 license = {text = "MIT"}
 
-
 [tool.pdm]
 distribution = false
 
@@ -19,3 +18,14 @@ dev = [
     "pytest>=9.1.0",
     "ipykernel>=7.3.0",
 ]
+
+[build-system]
+requires = ["pdm-backend"]
+build-backend = "pdm.backend"
+
+[tool.pdm.build]
+package-dir = "src"
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]

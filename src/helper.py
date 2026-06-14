@@ -5,10 +5,10 @@ import pandas as pd
 
 def load_logfile(filePath:Path, 
                  detection_ts: pd.Timestamp, 
-                 delta_time: pd.Timedelta, 
-                 ts_cols: list[str],
                  wt_id: Optional[str], 
                  wt_col: Optional[str],
+                 ts_cols: list[str]= ["Timestamp start", "Timestamp end"],
+                 delta_time: pd.Timedelta= pd.Timedelta(days=30), 
                  chunk_size: int = 30) -> List[pd.DataFrame]:
     
     if not os.path.exists(filePath):

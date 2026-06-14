@@ -1,4 +1,4 @@
-from typing import Optional
+from typing import Optional, List
 import os
 from pathlib import Path
 import pandas as pd
@@ -8,7 +8,8 @@ def load_logfile(filePath:Path,
                  delta_time: pd.Timedelta, 
                  ts_cols: list[str],
                  wt_id: Optional[str], 
-                 wt_col: Optional[str]) -> pd.DataFrame:
+                 wt_col: Optional[str],
+                 chunk_size: int = 30) -> List[pd.DataFrame]:
     
     if not os.path.exists(filePath):
         raise ValueError("Path does not exist.")
@@ -29,4 +30,22 @@ def load_logfile(filePath:Path,
     start = detection_ts - delta_time
     df = df[(df["Timestamp start"] >= start) & (df["Timestamp end"] <= end)]
     
-    return df
+    chunks = _split_logs(df, chunk_size=chunk_size)
+    
+    return chunks
+
+def _split_logs(logs: pd.DataFrame,
+               chunk_size: int) -> List[pd.DataFrame]:
+    n = len(logs)
+    if chunk_size >= n:
+        return [logs]
+    if not 0 < chunk_size:
+        raise ValueError("Chunk size must be positive")
+    
+    chunks: List[pd.DataFrame] = []
+    
+    for s in range(0, n, chunk_size):
+        e = s + chunk_size
+        chunks.append(logs.iloc[s:e].copy())
+    
+    return chunks

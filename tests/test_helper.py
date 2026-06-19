@@ -4,6 +4,7 @@ import pandas as pd
 import sys
 from src import helper, constants
 
+@pytest.mark.parallel
 def test_load_logfile_returns_empty_list() -> None:
     chunks = helper.load_logfile(list(Path(constants.PATH_STATUS_LOGS).glob("*.csv"))[0],
                                  wt_col=None,
@@ -15,7 +16,8 @@ def test_load_logfile_returns_empty_list() -> None:
     
     assert len(chunks) == 1, "chunks is empty"
     assert chunks[0].empty == True, "df is not empty"
-    
+
+@pytest.mark.parallel
 def test_load_logfile_returns_chunks() -> None:
     
     chunks = helper.load_logfile(list(Path(constants.PATH_STATUS_LOGS).glob("*.csv"))[0],

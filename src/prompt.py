@@ -1,5 +1,6 @@
 from typing import Sequence
 import pandas as pd
+from src import constants
 
 def format_chunk_logs(
     chunk_log: pd.DataFrame,
@@ -27,18 +28,11 @@ def build_prompt(detection_id: str,
                  wt_id: str | int,
                  signal_name: str,
                  logs_text: str,
-                 det_stats: pd.DataFrame
+                 det_stats: pd.Series,
+                 cols_to_round: list[str] = constants.COLS_TO_ROUND
                  ) -> str:
-    cols = ["re_at_ts",
-            "value_at_ts",
-            "delta_at_ts",
-            "z_at_ts",
-            "mean_baseline",
-            "std_baseline",
-            "mean_event",
-            "std_event",
-            "delta_mean",
-            "z_shift",]
+    cols = cols_to_round
+    
     det_stats[cols] = det_stats[cols].copy().round(2)
     return f""" 
         You are a data analyst in context of wind turbine SCADA data anomaly detection and also a specialist in wind turbine operating and wind turbine engineer.
@@ -56,18 +50,7 @@ def build_prompt(detection_id: str,
         - wind turbine id: {wt_id}
         - detection timestamp: {detection_ts}
         - affected signal: {signal_name}
-        - reconstruction_error_at_ts: {det_stats["re_at_ts"]}
-        - value_at_detection_ts: {det_stats["value_at_ts"]}
-        - delta_at_detection_ts: {det_stats["delta_at_ts"]}
-        - z_at_detection_ts: {det_stats["z_at_ts"]}
-        - baseline_mean: {det_stats["mean_baseline"]}
-        - baseline_std: {det_stats["std_baseline"]}
-        - event_mean: {det_stats["mean_event"]}
-        - event_std: {det_stats["std_event"]}
-        - delta_mean: {det_stats["delta_mean"]}
-        - z_shift: {det_stats["z_shift"]}
-        - event_window_start: {det_stats["window_start"]}
-        - event_window_end: {det_stats["window_end"]}
+        - detection statistics: {det_stats.to_string()}
         
         Status logs around the detection time:
         {logs_text}
@@ -81,17 +64,17 @@ def build_prompt(detection_id: str,
             "detection_id": {detection_id},
             "detections_ts":{detection_ts},
             "relevant_signal":{signal_name},
-            "Anomaly_description_reasoning": "...",
+            "anomaly_description_reasoning": "...",
             "relevant_logs": [
                 {{
                     "log_index": 1,
                     "log_start_ts": ...,
                     "log_end_ts": ...,
-                    "relevance: "strong | medium | weak",
+                    "relevance": "strong | medium | weak",
+                    "influence": "direct | indirect"
                     "reasoning": "...",
                 }}
             ],
-            "overall_reasoning: "..." 
         }}
         
         """.strip()

@@ -2,6 +2,7 @@ from typing import Optional, List
 import os
 from pathlib import Path
 import pandas as pd
+import warnings
 
 def load_logfile(filePath:Path, 
                  detection_ts: pd.Timestamp, 
@@ -23,9 +24,10 @@ def load_logfile(filePath:Path,
     
     if wt_id and wt_col:
         if wt_col not in list(df.columns):
-            raise ValueError(f"The column: {wt_col} does not exist in the table")
-        if not wt_id == str(df[wt_col].unique()[0]):
-            raise ValueError("WT ID does not exist")
+            warnings.warn(f"The column: {wt_col} does not exist in the table. Available columns: {df.columns}", UserWarning)
+        if not str(wt_id) == str(df[wt_col].unique()[0]):
+            warnings.warn(f"WT ID does not exist in status logs. Available columns:{df.columns}", UserWarning)
+            
     end = detection_ts + delta_time
     start = detection_ts - delta_time
     df = df[(df["Timestamp start"] >= start) & (df["Timestamp end"] <= end)]

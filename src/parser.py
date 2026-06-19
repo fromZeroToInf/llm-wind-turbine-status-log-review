@@ -1,14 +1,13 @@
-import json
+from pydantic import ValidationError
 from typing import Any
-
+from src.schema import LLMOutput
+import warnings
 #TODO: if not a valid response format, then try to fix it through the llm again
-def parse_to_json(response: str) -> dict[str, Any]:
+def parse_to_json(response: str) -> LLMOutput:
     try: 
-        parsed = json.loads(response)
-    except json.JSONDecodeError as exc:
-        raise ValueError(f"Response is not valid JSON") from exc
-
-    if not isinstance(parsed, dict):
-        raise ValueError(f"Expected JSON object, got: {type(parsed)}")
-    
-    return parsed
+        return LLMOutput.model_validate_json(response) 
+    except ValidationError as exc:
+        warnings.warn("LLM output format is faulty.")
+        #TODO
+        # send this response again to the llm with a new task to repair it?
+        raise ValueError(f"Error: {exc}")

@@ -71,7 +71,7 @@ def build_prompt(detection_id: str,
                     "log_start_ts": ...,
                     "log_end_ts": ...,
                     "relevance": "strong | medium | weak",
-                    "influence": "direct | indirect"
+                    "influence": "direct | indirect",
                     "reasoning": "...",
                 }}
             ],

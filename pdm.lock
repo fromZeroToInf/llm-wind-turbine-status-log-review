@@ -5,7 +5,7 @@
 groups = ["default", "dev"]
 strategy = ["inherit_metadata"]
 lock_version = "4.5.0"
-content_hash = "sha256:00c1c4609dd5595f27afb4cbc6bc3a3f7286fcce4a7a360fdd226331c790192e"
+content_hash = "sha256:583eb54004d2ecf51b613d019e2620d8c64ae33167917144e708ec39ca4b64a4"
 
 [[metadata.targets]]
 requires_python = "==3.12.*"
@@ -1057,7 +1057,7 @@ version = "2026.2"
 requires_python = ">=2"
 summary = "Provider of IANA time zone data"
 groups = ["default"]
-marker = "sys_platform == \"win32\" or sys_platform == \"emscripten\""
+marker = "sys_platform == \"emscripten\" or sys_platform == \"win32\""
 files = [
     {file = "tzdata-2026.2-py2.py3-none-any.whl", hash = "sha256:bbe9af844f658da81a5f95019480da3a89415801f6cc966806612cc7169bffe7"},
     {file = "tzdata-2026.2.tar.gz", hash = "sha256:9173fde7d80d9018e02a662e168e5a2d04f87c41ea174b139fbef642eda62d10"},

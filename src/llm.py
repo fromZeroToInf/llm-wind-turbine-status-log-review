@@ -16,9 +16,9 @@ def call_llm(
     temperature: float = 0.0,
     max_tokens: int = 2048,
 ) -> str:
-    
-    if provider == "openai":
-        return _call_openai(system_prompt, user _)
+    pass
+    # if provider == "openai":
+    #     return _call_openai(system_prompt, user _)
 
 
 

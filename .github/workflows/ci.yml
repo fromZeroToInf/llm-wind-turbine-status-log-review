@@ -26,4 +26,4 @@ jobs:
               run: pdm install -G dev
 
             - name: Run tests
-              run: pdm run test_parallel -v --color=yes
+              run: pdm run test_parallel

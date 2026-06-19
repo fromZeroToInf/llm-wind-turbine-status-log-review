@@ -41,7 +41,7 @@ def review_detection(
                                  model=model,
                                  temperature=0.0)
         
-        answer_json = parser.parse_to_json(answer)
+        answer_json = parser.parse_json(answer)
         if len(answers) == 0:
             answers = answer_json
         else:

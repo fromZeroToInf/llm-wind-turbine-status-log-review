@@ -6,7 +6,7 @@ from src import helper, constants
 
 @pytest.mark.parallel
 def test_load_logfile_returns_empty_list() -> None:
-    chunks = helper.load_logfile(list(Path(constants.PATH_STATUS_LOGS).glob("*.csv"))[0],
+    chunks = helper.load_logfile(sorted(Path(constants.PATH_STATUS_LOGS).glob("*.csv"), key=lambda p: p.name)[0],
                                  wt_col=None,
                                  wt_id=None,
                                  detection_ts=pd.to_datetime("2020-11-22 20:00:00"),
@@ -20,7 +20,7 @@ def test_load_logfile_returns_empty_list() -> None:
 @pytest.mark.parallel
 def test_load_logfile_returns_chunks() -> None:
     
-    chunks = helper.load_logfile(list(Path(constants.PATH_STATUS_LOGS).glob("*.csv"))[0],
+    chunks = helper.load_logfile(sorted(Path(constants.PATH_STATUS_LOGS).glob("*.csv"), key=lambda p: p.name)[0],
                                  wt_col=None,
                                  wt_id=None,
                                  detection_ts=pd.to_datetime("2020-11-22 20:00:00"),

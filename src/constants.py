@@ -42,3 +42,8 @@ COLS_TO_ROUND = ["re_at_ts",
             "std_event",
             "delta_mean",
             "z_shift",]
+
+"""
+Control tokens
+"""
+MAX_TOKENS= 2048

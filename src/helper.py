@@ -26,7 +26,7 @@ def load_logfile(filePath:Path,
         if wt_col not in list(df.columns):
             warnings.warn(f"The column: {wt_col} does not exist in the table. Available columns: {df.columns}", UserWarning)
         if not str(wt_id) == str(df[wt_col].unique()[0]):
-            warnings.warn(f"WT ID does not exist in status logs. Available columns:{df.columns}", UserWarning)
+            warnings.warn(f"WT ID does not exist in status logs. WT ID is {wt_id}, and available is WT ID: {str(df[wt_col].unique()[0])}", UserWarning)
             
     end = detection_ts + delta_time
     start = detection_ts - delta_time

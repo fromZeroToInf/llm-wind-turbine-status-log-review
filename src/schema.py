@@ -14,7 +14,7 @@ class LLMOutput(BaseModel):
     
     wt_id: str
     detection_id: str = Field(description="Df index value of the detection")
-    detections_ts: str = Field(description="Timestamp of the detection")
+    detection_ts: str = Field(description="Timestamp of the detection")
     relevant_signal: str = Field(description="Considered Signal name of the Detection")
     anomaly_description_reasoning: str = Field(description="Brief description of the anomaly event")
     relevant_logs: list[RelevantLog]

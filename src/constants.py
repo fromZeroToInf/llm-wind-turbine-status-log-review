@@ -99,8 +99,7 @@ SYSTEM_PROMPT: Template = Template("""
         - inconclusive: choose this if the information is insufficient, contradictory, or too weak for a clear assessment.
 
         Output constraints:
-        - Keep anomaly_description_reasoning to one short sentence.
-        - Keep each log reasoning to one short sentence.
+        - Keep anomaly_description_reasoning, log reasoning and overall_assessment to one short sentence.
         - Do not write long explanations.
         
         Return valid JSON only.

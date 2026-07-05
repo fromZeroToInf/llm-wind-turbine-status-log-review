@@ -67,6 +67,34 @@ def _write_jsonl(file_path:Path, obj:dict, mode:str)-> None:
     with jsonlines.open(file_path, mode=mode) as writer:
             writer.write(obj)
 
+def read_jsonl(file_path:Path)-> pd.DataFrame:
+    entries: list[dict] = []
+    
+    try:
+        with jsonlines.open(file_path, mode="r") as reader:
+            for obj in reader:
+                entries.append(obj)
+    except Exception as exc:
+        warnings.warn(f"Error on File or Path: {exc}")
+    
+    df_outputs = pd.DataFrame(entries)
+    df_outputs["n_relevant_logs"] = df_outputs["relevant_logs"].apply(len)
+    
+    return df_outputs
+
+def logs_from_row(row: pd.Series) -> pd.DataFrame:
+    logs = row["relevant_logs"]
+    if not logs:
+        return pd.DataFrame()
+    
+    return pd.DataFrame(logs)
+
+def view_on_col(row: pd.Series, col:str) -> None:
+    try:
+        print(row[col])
+    except Exception as ex:
+        warnings.warn("Error: {ex}")
+
 def _get_idx(file_path:Path)-> int:
     
     last_idx: int = -1

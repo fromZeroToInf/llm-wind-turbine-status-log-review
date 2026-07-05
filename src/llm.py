@@ -103,6 +103,13 @@ def _call_gemini(
     if response.text is None:
         raise ValueError("Gemini returned empty content")
     
+    finish_reason = None
+    if response.candidates:
+        finish_reason = response.candidates[0].finish_reason
+    
+    if finish_reason is not None and not "FinishReason.STOP":
+        print(f"Gemini finish reason: {finish_reason}")    
+    
     return response.text
 
 def _call_claude(
@@ -114,7 +121,7 @@ def _call_claude(
         response = client.messages.create(
             model=model,
             system=system_prompt,
-            message=[
+            messages=[
                 {
                     "role": "user",
                     "content": user_prompt,
@@ -130,7 +137,7 @@ def _call_claude(
     
     return "\n".join(text_blocks)
 
-PROVIDER_REGISTRY: dict[str, LLMCall] = {
+PROVIDER_REGISTRY: dict[LLMProvider, LLMCall] = {
        LLMProvider.OLLAMA: _call_ollama,
        LLMProvider.OPENAI: _call_openai,
        LLMProvider.GEMINI: _call_gemini,

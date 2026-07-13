@@ -23,8 +23,27 @@ class penmanshielProvider:
         
         window = scada_df.loc[
             (scada_df[cts.WT_ID] == wt_id)
-            & (pd.to_datetime(scada_df[cts.DET_TS_COL]))
-        ]
+            & (pd.to_datetime(scada_df[cts.DET_TS_COL]) >= start_ts)
+            & (pd.to_datetime(scada_df[cts.DET_TS_COL]) <= end_ts)
+            & (scada_df[cts.SIGNAL] == signal_name),
+            [cts.DET_TS_COL, cts.SIGNAL],
+        ].copy()
+        
+        return window
     
     def get_detection_metrics(self, detection: pd.Series) -> dict[str, Any]:
-        ...
+        cols=[
+            "z_at_ts",
+            "z_shift",
+            "delta_mean",
+            "values_at_ts",
+            "mean_baseline",
+            "std_baseline",
+        ]
+    
+        return {
+            col: detection.get(col)
+            for col in cols
+            if col in detection.index
+        }
+    

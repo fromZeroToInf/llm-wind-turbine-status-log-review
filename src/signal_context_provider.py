@@ -14,11 +14,9 @@ class SignalContextProvider(Protocol):
     def get_signal_name(self, detection: pd.Series) -> str:
         ...
     
-    def get_signal_window(self, scada_df: pd.DataFrame, detection: pd.Series, prepost_window: int) -> pd.DataFrame:
+    def get_signal_window(self, scada_df: pd.DataFrame, detection: pd.Series, prepost_window: int, time_unit: str) -> pd.DataFrame:
         ...
     
     def get_detection_metrics(self, detection: pd.Series) -> dict[str, Any]:
         ...
-    
-    
     

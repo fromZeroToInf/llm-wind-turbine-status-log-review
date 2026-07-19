@@ -8,6 +8,7 @@ from string import Template
 PATH_PROJECT_ROOT =define_project_root_path()
 PATH_STATUS_LOGS = PATH_PROJECT_ROOT/"examples/status_logs/"
 PATH_DETECTIONS = PATH_PROJECT_ROOT/"examples/detections/"
+PATH_SIGNALS = PATH_PROJECT_ROOT/"examples/raw_signals/"
 PATH_OUTPUT = PATH_PROJECT_ROOT/"src"/"results"/"output"
 PATH_LAST_IDX = PATH_PROJECT_ROOT/"src"/"results"/"index"
 

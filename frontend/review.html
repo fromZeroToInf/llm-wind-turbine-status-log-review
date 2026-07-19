@@ -5,13 +5,14 @@
     <script src="https://cdn.jsdelivr.net/npm/echarts@6.1.0/dist/echarts.min.js"></script>
 </head>
 <body>
+    <a href="/">Back to detections</a>
     <h1> Wind Turbine Anomaly Review Dashboard</h1>
     <p>WT ID: <span id="wt-id"></span></p>
     <p>Detection ID: <span id="detection-id"></span></p>
     <p>Detection timestamp: <span id="detection-ts"></span></p>
     <p>Signal: <span id="relevant-signal"></span></p>
     <p>Anomaly description: <span id="anomaly-description-reasoning"></span></p>
-    <ul id="relevant-logs"></ul>
+    <table id="relevant-logs" style="width: 100%"></table>
     <p>Info: <span id="overall-assessment"></span></p>
     <p>LLM Reasoning:<span id="overall-reasoning"></span></p>
     <div id="signal-chart" style="width: 100%; height: 500px;"></div>

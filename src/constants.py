@@ -11,6 +11,7 @@ PATH_DETECTIONS = PATH_PROJECT_ROOT/"examples/detections/"
 PATH_SIGNALS = PATH_PROJECT_ROOT/"examples/raw_signals/"
 PATH_OUTPUT = PATH_PROJECT_ROOT/"src"/"results"/"output"
 PATH_LAST_IDX = PATH_PROJECT_ROOT/"src"/"results"/"index"
+PATH_POWERCURVE = PATH_PROJECT_ROOT/"examples/powercurve/"
 
 FN_OUTPUT = "out.jsonl"
 FN_IDX = "idx.jsonl"
@@ -37,6 +38,12 @@ Detection Columns
 DET_TS_COL = "Date and time"
 WT_ID = "WT_ID"
 SIGNAL = "signal_name"
+
+"""
+Signal window
+"""
+PRE_POST_WINDOW = pd.Timedelta(days=30)
+
 
 """
 Columns to round to 2 decimal numbers
@@ -141,6 +148,7 @@ USER_PROMPT: Template = Template(
         {
         "wt_id": "$wt_id",
         "detection_id": "$detection_id",
+        "detection_index": "$detection_index",
         "detection_ts": "$detection_ts",
         "relevant_signal": "$signal_name",
         "anomaly_description_reasoning": "...",
@@ -161,6 +169,7 @@ USER_PROMPT: Template = Template(
         {
         "wt_id": "$wt_id",
         "detection_id": "$detection_id",
+        "detection_index": "$detection_index",
         "detection_ts": "$detection_ts",
         "relevant_signal": "$signal_name",
         "anomaly_description_reasoning": "...",

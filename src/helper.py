@@ -3,6 +3,7 @@ import os
 from pathlib import Path
 import pandas as pd
 import warnings
+import src.constants as cts
 
 def load_logfile(filePath:Path, 
                  detection_ts: pd.Timestamp, 
@@ -51,3 +52,4 @@ def _split_logs(logs: pd.DataFrame,
         chunks.append(logs.iloc[s:e].copy())
     
     return chunks
+

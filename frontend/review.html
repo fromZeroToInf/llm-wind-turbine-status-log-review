@@ -1,14 +1,17 @@
 <!DOCTYPE html>
+<html data-theme="light"></html>
 <head>
     <meta charset="UTF-8">
     <title> Wind Turbine Anomaly Review Dashboard</title>
     <script src="https://cdn.jsdelivr.net/npm/echarts@6.1.0/dist/echarts.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
 </head>
 <body>
     <a href="/">Back to detections</a>
     <h1> Wind Turbine Anomaly Review Dashboard</h1>
     <p>WT ID: <span id="wt-id"></span></p>
     <p>Detection ID: <span id="detection-id"></span></p>
+    <p>Detection Index: <span id="detection-idx"></span></p>
     <p>Detection timestamp: <span id="detection-ts"></span></p>
     <p>Signal: <span id="relevant-signal"></span></p>
     <p>Anomaly description: <span id="anomaly-description-reasoning"></span></p>
@@ -16,6 +19,7 @@
     <p>Info: <span id="overall-assessment"></span></p>
     <p>LLM Reasoning:<span id="overall-reasoning"></span></p>
     <div id="signal-chart" style="width: 100%; height: 500px;"></div>
-    <script src="/static/review.js"></script>
+    <div id="powercurve" style="width: 100%; height: 500px;"></div>
+    <script src="/static/review.js?v=2"></script>
 </body>
 </html>

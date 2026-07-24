@@ -10,7 +10,7 @@ from src import constants as cts
 import warnings
 import time
 import random as rnd
-
+from tqdm import tqdm
 
 def review_detection(
     detection: pd.Series,
@@ -26,7 +26,11 @@ def review_detection(
 
 )-> LLMOutput:
     
-    det_idx = detection.name
+    if not isinstance(detection,pd.Series):
+        raise ValueError("detection is not of type pd.Series")
+    
+    det_id = detection.name
+    det_idx = detection["index"]
     det_ts = pd.to_datetime(detection[detection_ts_col], errors="coerce")
     wt_id = detection[wt_id_col]
     signal_name = detection[signal_col]
@@ -43,7 +47,7 @@ def review_detection(
     chunks = [prompt.format_chunk_logs(chunk_log=chunk, columns=cts.LOG_COLS) for chunk in chunks]
     system_prompt = prompt.build_system_prompt()
     
-    prompts = [prompt.build_user_prompt(detection_id=det_idx, detection_ts=det_ts, wt_id=wt_id, signal_name=signal_name, logs_text=chunk,det_stats=detection) for chunk in chunks]
+    prompts = [prompt.build_user_prompt(detection_id=det_id,detection_index=det_idx , detection_ts=det_ts, wt_id=wt_id, signal_name=signal_name, logs_text=chunk,det_stats=detection) for chunk in chunks]
     
     answers:LLMOutput | None = None
     
@@ -133,7 +137,7 @@ def deep_search(
     
     wait_seconds = wait_seconds
     
-    detections= detections.reset_index()
+    #detections= detections.reset_index(drop=True)
     
     cts.PATH_OUTPUT.mkdir(parents=True, exist_ok=True)
     output_file_path  = cts.PATH_OUTPUT / cts.FN_OUTPUT
@@ -143,7 +147,7 @@ def deep_search(
     
     last_idx = _get_idx(idx_path)
     
-    for idx,row in detections.iterrows():
+    for idx,row in tqdm(detections.iterrows(), desc="Inspecting Detections"):
         
         if idx < last_idx:
             continue

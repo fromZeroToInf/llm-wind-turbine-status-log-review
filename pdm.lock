@@ -5,7 +5,7 @@
 groups = ["default", "dev"]
 strategy = ["inherit_metadata"]
 lock_version = "4.5.0"
-content_hash = "sha256:1cdbd6f32bef42b9555b6152b89fc3b45d95ca6f4d4887b2ac8f85a885e6576d"
+content_hash = "sha256:30f7860802836a387343b6b466017b1703c39a80fd40b503650af81b0e4afe40"
 
 [[metadata.targets]]
 requires_python = "==3.12.*"
@@ -328,6 +328,16 @@ groups = ["dev"]
 files = [
     {file = "decorator-5.3.1-py3-none-any.whl", hash = "sha256:f47fe6fdbd2edd623ecfe36875d37aba411624e2670dd395dddae1358689bb3c"},
     {file = "decorator-5.3.1.tar.gz", hash = "sha256:4cbcdd55a6efadb9dbea26b858f4fb3264567b52d69ca0d25b721b553f60ea82"},
+]
+
+[[package]]
+name = "directory-tree"
+version = "1.0.0"
+summary = "Utility Package that Displays out the Tree Structure of a Particular Directory."
+groups = ["dev"]
+files = [
+    {file = "directory_tree-1.0.0-py3-none-any.whl", hash = "sha256:2484ba5e9d35e087703913cc85e920f08b9b942859b9f5a0eae24699d3364734"},
+    {file = "directory_tree-1.0.0.tar.gz", hash = "sha256:d65b404d7e561db62e6321f36c612cd12da2e9fbe5cbae98da73ce14c0ec910d"},
 ]
 
 [[package]]

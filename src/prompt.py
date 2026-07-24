@@ -28,6 +28,7 @@ def build_system_prompt() -> str:
 
 def build_user_prompt(
     detection_id: str,
+    detection_index: str,
     detection_ts: pd.Timestamp,
     wt_id: str | int,
     signal_name: str,
@@ -40,6 +41,7 @@ def build_user_prompt(
     det_stats[cols] = det_stats[cols].copy().round(2)
     return constants.USER_PROMPT.substitute(
         detection_id=detection_id,
+        detection_index=detection_index,
         detection_ts=str(detection_ts),
         wt_id=str(wt_id),
         signal_name=signal_name,

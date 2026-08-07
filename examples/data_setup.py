@@ -150,4 +150,4 @@ def penmanshiel_setup():
     preprocessing_merge_files(cts.PATH_SIGNALS)
     cleanup_zip_files()
 
-penmanshiel_setup()
+

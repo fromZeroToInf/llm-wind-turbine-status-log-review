@@ -2,7 +2,7 @@
 
 LLM assisted status log reviewer to find relevant information for anomaly detections and to prioritize relevant detections.
 
-Dieses Projekt ist ein Follow-up meines Projekts „Explorative AD in Windturbinen-SCADA-Daten unter Verwendung eines AE“ (https://github.com/fromZeroToInf/Explorative-AD-in-Wind-Turbine-SCADA-Data-Using-an-AE). This projected is intended to be a feasibility test and has a explorative character.
+This project is a follow-up of ["Explorative AD in Wind Turbine SCADA Data Using an AE“](https://github.com/fromZeroToInf/Explorative-AD-in-Wind-Turbine-SCADA-Data-Using-an-AE). This projected is intended to be a feasibility test and has a explorative character.
 
 This project aims to filter undocumented detection events.
 
